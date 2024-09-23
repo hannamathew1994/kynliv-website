@@ -3,141 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover premium health and wellness products at Kynliv. Transform your well-being with innovative solutions.">
-    <title>Kynliv - Home</title>
+    <title>KYNLiV Inc. - Kindness for Life</title>
+    <style>
+        :root {
+            --primary-color: #3490dc;
+            --secondary-color: #6574cd;
+            --accent-color: #9561e2;
+            --text-color: #ffffff;
+            --background-color: #1a202c;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <!-- Animate.css for animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
 
-    <!-- Swiper.js for slider -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles.css">
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header id="header">
+        <nav class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#mission">Mission</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<!-- Header -->
-<header>
-    <h1 class="animate__animated animate__fadeInDown">Welcome to Kynliv</h1>
-    <p class="animate__animated animate__fadeInUp">Discover premium wellness products</p>
-</header>
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>KYNLiV Inc.</h1>
+                <p>Kindness for Life</p>
+            </div>
+        </section>
 
-<!-- Navigation with Smooth Scroll -->
-<nav>
-    <a href="#products">Products</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#about">About Us</a>
-    <a href="#contact">Contact</a>
-</nav>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>KYNLiV is at the forefront of immunotherapeutic drug discovery, targeting autoimmune diseases and cancers. We pioneer the development of innovative immunotherapies that address both autoimmunity and cancer, aiming to balance the immune system by reprogramming immune cells to selectively suppress harmful immune responses while preserving the body's natural defense mechanisms.</p>
+            </div>
+        </section>
 
-<!-- Hero Slider (Swiper.js) -->
-<section class="hero">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url('hero-image1.jpg');">
-                <div class="overlay">
-                    <h1>Empower Your Health</h1>
-                    <p>Revolutionary Products for a Healthier You</p>
-                    <a href="#products" class="cta-button">Shop Now</a>
+        <section id="team" class="section">
+            <div class="container">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <h3>Cini Mathew John PhD, RPh</h3>
+                        <p>Director of Management and Research</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Chinna Keshavsa Umeshappa PhD</h3>
+                        <p>Director of Scientific Discoveries</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Fazlin Fauzi MPharm, PhD</h3>
+                        <p>Chief Scientist for Data and Informatics</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Alice Joshua</h3>
+                        <p>Strategic Partnership Advisor</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Hanna Mathew</h3>
+                        <p>Technology Officer</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Annette John MSc</h3>
+                        <p>Intern Student</p>
+                    </div>
                 </div>
             </div>
-            <div class="swiper-slide" style="background-image:url('hero-image2.jpg');">
-                <div class="overlay">
-                    <h1>Wellness Redefined</h1>
-                    <p>Find Your Balance with Our Products</p>
-                    <a href="#products" class="cta-button">Explore More</a>
-                </div>
+        </section>
+
+        <section id="mission" class="section">
+            <div class="container">
+                <h2>Our Mission</h2>
+                <p>Our mission is to advance a pipeline of proprietary drug candidates toward clinical trials. We're committed to developing more precise and effective treatments, avoiding the general suppression of the immune system. Our approach targets organ-specific immune regulation to create therapies that could potentially transform treatment options for millions of patients.</p>
             </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 KYNLiV Inc. All rights reserved.</p>
         </div>
-        <!-- Slider Navigation -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-</section>
+    </footer>
 
-<!-- Products Section -->
-<section class="section" id="products">
-    <h2>Our Products</h2>
-    <div class="products">
-        <div class="product-card animate__animated animate__fadeInUp">
-            <img src="product1.jpg" alt="Product 1">
-            <h3>Product 1</h3>
-            <p>Discover the benefits of our leading wellness product.</p>
-        </div>
-        <div class="product-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-            <img src="product2.jpg" alt="Product 2">
-            <h3>Product 2</h3>
-            <p>Improve your vitality with our best-selling solution.</p>
-        </div>
-        <div class="product-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>Product 3</h3>
-            <p>Experience premium health with our innovative products.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials" id="testimonials">
-    <h2 class="animate__animated animate__fadeIn">What Our Customers Say</h2>
-    <div class="testimonial animate__animated animate__fadeInLeft">
-        <p>"Kynliv's products have transformed my life. I feel healthier and more energetic!"</p>
-        <h4>- Sarah J.</h4>
-    </div>
-    <div class="testimonial animate__animated animate__fadeInRight">
-        <p>"After using Kynliv, I can see a noticeable difference in my well-being. Highly recommended!"</p>
-        <h4>- Michael T.</h4>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Kynliv - All Rights Reserved</p>
-    <p>Contact us: info@kynliv.com | (123) 456-7890</p>
-</footer>
-
-<!-- Swiper.js Script -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<!-- jQuery for smooth scrolling -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Custom JS -->
-<script>
-    // Swiper.js for slider
-    var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 1,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-
-    // Smooth scrolling
-    $('nav a').on('click', function(event) {
-        if (this.hash !== '') {
-            event.preventDefault();
-            var hash = this.hash;
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top
-            }, 800, function(){
-                window.location.hash = hash;
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
-        }
-    });
-</script>
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Lazy loading sections
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Performance optimizations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Defer non-critical CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .team-member img {
+                    max-width: 100%;
+                    border-radius: 50%;
+                    margin-bottom: 1rem;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Preload hero background images
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'image';
+            preloadLink.href = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="%233490dc"/%3E%3C/svg%3E';
+            document.head.appendChild(preloadLink);
+        });
+    </script>
 </body>
 </html>
