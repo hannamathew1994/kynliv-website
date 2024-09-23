@@ -1,347 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYNLiV Inc. - Immunotherapeutic Drug Discovery</title>
-    <style>
-        :root {
-            --primary-color: #006699;
-            --secondary-color: #00a86b;
-            --accent-color: #ff6b6b;
-            --text-color: #333333;
-            --background-color: #f5f5f5;
-            --card-bg: #ffffff;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<section id="what-we-do" class="section">
+    <div class="container">
+        <h2 class="fade-in-title">What We Do</h2>
+        <div class="card fade-in-card">
+            <p>Our focus is to pioneer <strong>immunotherapeutic treatments</strong> that restore balance to the immune system. We are driven by science and innovation, and we strive to develop therapies that:</p>
+            <ul class="styled-list">
+                <li><strong>Target specific autoimmune disorders</strong> and cancers linked to immune dysfunction.</li>
+                <li><strong>Preserve the body's natural defenses</strong>, avoiding the common issues of broad immunosuppression that lead to increased risk of infections or other health complications.</li>
+                <li><strong>Provide organ-specific immune regulation</strong>, offering patients more effective, targeted treatment options.</li>
+            </ul>
+            <p>We are committed to helping people with chronic immune-related diseases live healthier, fuller lives.</p>
+        </div>
+    </div>
+</section>
 
-        html {
-            scroll-behavior: smooth;
-        }
+<section id="why" class="section">
+    <div class="container">
+        <h2 class="fade-in-title">Why KYNLiV?</h2>
+        <div class="card fade-in-card">
+            <p>Autoimmune diseases and cancers present some of the most <strong>complex challenges</strong> in modern medicine, where the immune system mistakenly attacks the body or fails to eliminate harmful cells. While medical advances have been made, there is <strong>no cure</strong> for many autoimmune diseases, and current treatments often rely on suppressing the immune system broadly—leading to severe side effects such as heightened risk of infections and even cancer.</p>
+            <p>At KYNLiV, we recognize the <strong>urgent need for more precise treatments</strong>, and our therapies aim to deliver the precision and effectiveness required to tackle these diseases at their core, <strong>without harmful side effects</strong>.</p>
+        </div>
+    </div>
+</section>
 
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            overflow-x: hidden;
-        }
+<style>
+    /* Additional Classy Styling */
+    .fade-in-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1.2s ease forwards;
+    }
 
-        .container {
-            width: 80%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .fade-in-card {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1.2s ease forwards 0.3s;
+    }
 
-        header {
-            background: var(--primary-color);
-            color: #ffffff;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease-in-out;
-        }
+    .styled-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1.5rem;
+    }
 
-        header.scrolled {
-            padding: 0.5rem 0;
-            background: rgba(0, 102, 153, 0.9);
-        }
+    .styled-list li {
+        position: relative;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+    }
 
-        nav ul {
-            display: flex;
-            justify-content: space-around;
-            list-style: none;
-        }
+    .styled-list li::before {
+        content: '✔';
+        color: var(--accent-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: #ffffff;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') center/50px 50px;
-            animation: rotate 60s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section {
-            padding: 5rem 0;
+    /* Fade in effect */
+    @keyframes fadeInUp {
+        from {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(30px);
         }
-
-        .section.visible {
+        to {
             opacity: 1;
             transform: translateY(0);
         }
-
-        .section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: var(--primary-color);
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-member {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .team-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .section h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header id="header">
-        <nav class="container">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#what-we-do">What We Do</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#why">Why KYNLiV</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>KYNLiV Inc.</h1>
-                <p>Immunotherapeutic Drug Discovery</p>
-                <p><em>Kindness for Life</em></p>
-            </div>
-        </section>
-
-        <section id="about" class="section">
-            <div class="container">
-                <h2>Welcome to KYNLiV</h2>
-                <div class="card">
-                    <p>At <strong>KYNLiV</strong>, we are revolutionizing the field of immunotherapy by developing cutting-edge treatments that target <strong>autoimmunity</strong> and <strong>cancer</strong> without compromising the immune system's natural defense mechanisms. Our therapies reprogram disease-associated immune cells to selectively suppress harmful responses, while <strong>preserving overall immune function</strong>. This innovative approach brings hope to millions suffering from immune-related disorders and cancers, offering a <strong>precise and organ-specific treatment</strong> that transforms the medical landscape.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="what-we-do" class="section">
-            <div class="container">
-                <h2>What We Do</h2>
-                <div class="card">
-                    <p>Our focus is to pioneer <strong>immunotherapeutic treatments</strong> that restore balance to the immune system. We are driven by science and innovation, and we strive to develop therapies that:</p>
-                    <ul>
-                        <li><strong>Target specific autoimmune disorders</strong> and cancers linked to immune dysfunction.</li>
-                        <li><strong>Preserve the body's natural defenses</strong>, avoiding the common issues of broad immunosuppression that lead to increased risk of infections or other health complications.</li>
-                        <li><strong>Provide organ-specific immune regulation</strong>, offering patients more effective, targeted treatment options.</li>
-                    </ul>
-                    <p>We are committed to helping people with chronic immune-related diseases live healthier, fuller lives.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="team" class="section">
-            <div class="container">
-                <h2>Meet Our Team</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <h3>Cini Mathew John, PhD, RPh</h3>
-                        <p>Director of Management and Research</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Chinna Keshavsa Umeshappa, PhD</h3>
-                        <p>Director of Scientific Discoveries</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Fazlin Fauzi, MPharm, PhD</h3>
-                        <p>Chief Scientist, Data and Informatics</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Alice Joshua</h3>
-                        <p>Strategic Partnership Advisor</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Hanna Mathew</h3>
-                        <p>Technology Officer</p>
-                    </div>
-                    <div class="team-member">
-                        <h3>Annette John, MSc</h3>
-                        <p>Intern Student</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="why" class="section">
-            <div class="container">
-                <h2>Why KYNLiV?</h2>
-                <div class="card">
-                    <p>Autoimmune diseases and cancers present some of the most <strong>complex challenges</strong> in modern medicine, where the immune system mistakenly attacks the body or fails to eliminate harmful cells. While medical advances have been made, there is <strong>no cure</strong> for many autoimmune diseases, and current treatments often rely on suppressing the immune system broadly—leading to severe side effects such as heightened risk of infections and even cancer.</p>
-                    <p>At KYNLiV, we recognize the <strong>urgent need for more precise treatments</strong>, and our therapies aim to deliver the precision and effectiveness required to tackle these diseases at their core, <strong>without harmful side effects</strong>.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 KYNLiV Inc. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Lazy loading sections
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Animate team members on hover
-        const teamMembers = document.querySelectorAll('.team-member');
-        teamMembers.forEach(member => {
-            member.addEventListener('mouseenter', () => {
-                member.style.transform = 'scale(1.05)';
-                member.style.transition = 'transform 0.3s ease';
-            });
-            member.addEventListener('mouseleave', () => {
-                member.style.transform = 'scale(1)';
-            });
-        });
-    </script>
-</body>
-</html>
+    }
+</style>
