@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYNLiV Inc. - Kindness for Life</title>
+    <title>KYNLiV Inc. - Immunotherapeutic Drug Discovery</title>
     <style>
         :root {
-            --primary-color: #3490dc;
-            --secondary-color: #6574cd;
-            --accent-color: #9561e2;
-            --text-color: #ffffff;
-            --background-color: #1a202c;
+            --primary-color: #006699;
+            --secondary-color: #00a86b;
+            --accent-color: #ff6b6b;
+            --text-color: #333333;
+            --background-color: #f5f5f5;
+            --card-bg: #ffffff;
         }
         
         * {
@@ -24,7 +25,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
@@ -33,12 +34,14 @@
 
         .container {
             width: 80%;
+            max-width: 1200px;
             margin: 0 auto;
-            overflow: hidden;
+            padding: 0 20px;
         }
 
         header {
-            background: rgba(0, 0, 0, 0.8);
+            background: var(--primary-color);
+            color: #ffffff;
             padding: 1rem 0;
             position: fixed;
             width: 100%;
@@ -49,7 +52,7 @@
 
         header.scrolled {
             padding: 0.5rem 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 102, 153, 0.9);
         }
 
         nav ul {
@@ -59,7 +62,7 @@
         }
 
         nav ul li a {
-            color: var(--text-color);
+            color: #ffffff;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
@@ -75,30 +78,53 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') center/50px 50px;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero p {
             font-size: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section {
@@ -117,6 +143,21 @@
             font-size: 2.5rem;
             margin-bottom: 2rem;
             text-align: center;
+            color: var(--primary-color);
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .team-grid {
@@ -126,7 +167,7 @@
         }
 
         .team-member {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 10px;
             text-align: center;
@@ -135,18 +176,19 @@
 
         .team-member:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         footer {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: var(--primary-color);
+            color: #ffffff;
             text-align: center;
             padding: 2rem 0;
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             .hero p {
@@ -165,42 +207,61 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#what-we-do">What We Do</a></li>
                 <li><a href="#team">Team</a></li>
-                <li><a href="#mission">Mission</a></li>
+                <li><a href="#why">Why KYNLiV</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="home" class="hero">
-            <div class="container">
+            <div class="hero-content">
                 <h1>KYNLiV Inc.</h1>
-                <p>Kindness for Life</p>
+                <p>Immunotherapeutic Drug Discovery</p>
+                <p><em>Kindness for Life</em></p>
             </div>
         </section>
 
         <section id="about" class="section">
             <div class="container">
-                <h2>About Us</h2>
-                <p>KYNLiV is at the forefront of immunotherapeutic drug discovery, targeting autoimmune diseases and cancers. We pioneer the development of innovative immunotherapies that address both autoimmunity and cancer, aiming to balance the immune system by reprogramming immune cells to selectively suppress harmful immune responses while preserving the body's natural defense mechanisms.</p>
+                <h2>Welcome to KYNLiV</h2>
+                <div class="card">
+                    <p>At <strong>KYNLiV</strong>, we are revolutionizing the field of immunotherapy by developing cutting-edge treatments that target <strong>autoimmunity</strong> and <strong>cancer</strong> without compromising the immune system's natural defense mechanisms. Our therapies reprogram disease-associated immune cells to selectively suppress harmful responses, while <strong>preserving overall immune function</strong>. This innovative approach brings hope to millions suffering from immune-related disorders and cancers, offering a <strong>precise and organ-specific treatment</strong> that transforms the medical landscape.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-do" class="section">
+            <div class="container">
+                <h2>What We Do</h2>
+                <div class="card">
+                    <p>Our focus is to pioneer <strong>immunotherapeutic treatments</strong> that restore balance to the immune system. We are driven by science and innovation, and we strive to develop therapies that:</p>
+                    <ul>
+                        <li><strong>Target specific autoimmune disorders</strong> and cancers linked to immune dysfunction.</li>
+                        <li><strong>Preserve the body's natural defenses</strong>, avoiding the common issues of broad immunosuppression that lead to increased risk of infections or other health complications.</li>
+                        <li><strong>Provide organ-specific immune regulation</strong>, offering patients more effective, targeted treatment options.</li>
+                    </ul>
+                    <p>We are committed to helping people with chronic immune-related diseases live healthier, fuller lives.</p>
+                </div>
             </div>
         </section>
 
         <section id="team" class="section">
             <div class="container">
-                <h2>Our Team</h2>
+                <h2>Meet Our Team</h2>
                 <div class="team-grid">
                     <div class="team-member">
-                        <h3>Cini Mathew John PhD, RPh</h3>
+                        <h3>Cini Mathew John, PhD, RPh</h3>
                         <p>Director of Management and Research</p>
                     </div>
                     <div class="team-member">
-                        <h3>Chinna Keshavsa Umeshappa PhD</h3>
+                        <h3>Chinna Keshavsa Umeshappa, PhD</h3>
                         <p>Director of Scientific Discoveries</p>
                     </div>
                     <div class="team-member">
-                        <h3>Fazlin Fauzi MPharm, PhD</h3>
-                        <p>Chief Scientist for Data and Informatics</p>
+                        <h3>Fazlin Fauzi, MPharm, PhD</h3>
+                        <p>Chief Scientist, Data and Informatics</p>
                     </div>
                     <div class="team-member">
                         <h3>Alice Joshua</h3>
@@ -211,17 +272,20 @@
                         <p>Technology Officer</p>
                     </div>
                     <div class="team-member">
-                        <h3>Annette John MSc</h3>
+                        <h3>Annette John, MSc</h3>
                         <p>Intern Student</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="mission" class="section">
+        <section id="why" class="section">
             <div class="container">
-                <h2>Our Mission</h2>
-                <p>Our mission is to advance a pipeline of proprietary drug candidates toward clinical trials. We're committed to developing more precise and effective treatments, avoiding the general suppression of the immune system. Our approach targets organ-specific immune regulation to create therapies that could potentially transform treatment options for millions of patients.</p>
+                <h2>Why KYNLiV?</h2>
+                <div class="card">
+                    <p>Autoimmune diseases and cancers present some of the most <strong>complex challenges</strong> in modern medicine, where the immune system mistakenly attacks the body or fails to eliminate harmful cells. While medical advances have been made, there is <strong>no cure</strong> for many autoimmune diseases, and current treatments often rely on suppressing the immune system broadly—leading to severe side effects such as heightened risk of infections and even cancer.</p>
+                    <p>At KYNLiV, we recognize the <strong>urgent need for more precise treatments</strong>, and our therapies aim to deliver the precision and effectiveness required to tackle these diseases at their core, <strong>without harmful side effects</strong>.</p>
+                </div>
             </div>
         </section>
     </main>
@@ -267,25 +331,16 @@
             observer.observe(section);
         });
 
-        // Performance optimizations
-        document.addEventListener('DOMContentLoaded', () => {
-            // Defer non-critical CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                .team-member img {
-                    max-width: 100%;
-                    border-radius: 50%;
-                    margin-bottom: 1rem;
-                }
-            `;
-            document.head.appendChild(style);
-
-            // Preload hero background images
-            const preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.as = 'image';
-            preloadLink.href = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="%233490dc"/%3E%3C/svg%3E';
-            document.head.appendChild(preloadLink);
+        // Animate team members on hover
+        const teamMembers = document.querySelectorAll('.team-member');
+        teamMembers.forEach(member => {
+            member.addEventListener('mouseenter', () => {
+                member.style.transform = 'scale(1.05)';
+                member.style.transition = 'transform 0.3s ease';
+            });
+            member.addEventListener('mouseleave', () => {
+                member.style.transform = 'scale(1)';
+            });
         });
     </script>
 </body>
