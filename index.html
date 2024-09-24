@@ -1,143 +1,142 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { DNA } from 'react-loader-spinner';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaArrowRight, FaDna, FaMicroscope, FaUsers, FaChartLine } from 'react-icons/fa';
 
-const KYNLiVWebsite = () => {
-  const [scrollY, setScrollY] = useState(0);
+const sections = ['About', 'What We Do', 'Our Mission', 'Our Team', 'Why KYNLiV'];
+
+const App = () => {
+  const [activeSection, setActiveSection] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
-  const headerVariants = {
-    top: { backgroundColor: 'rgba(45, 27, 78, 0)' },
-    scrolled: { backgroundColor: 'rgba(45, 27, 78, 0.9)' }
+  const nextSection = () => {
+    setActiveSection((prev) => (prev + 1) % sections.length);
   };
 
   return (
-    <div className="bg-[#2d1b4e] text-white min-h-screen font-sans">
-      <motion.header
-        className="fixed w-full z-50 transition-colors duration-300"
-        initial="top"
-        animate={scrollY > 50 ? "scrolled" : "top"}
-        variants={headerVariants}
-      >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-2xl font-bold"
-          >
-            KYNLiV
-          </motion.div>
-          <nav>
-            <ul className="flex space-x-6">
-              {['About Us', 'What We Do', 'Our Mission', 'Team', 'Why KYNLiV'].map((item, index) => (
-                <motion.li
-                  key={item}
-                  initial={{ y: -50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-[#b19cd9] transition-colors">
-                    {item}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </motion.header>
-
-      <main>
-        <section id="hero" className="h-screen flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2d1b4e] to-[#4a2a82]" />
-          <DNA
-            visible={true}
-            height="200"
-            width="200"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20"
-          />
-          <div className="container mx-auto px-4 z-10">
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
+    <div className="bg-gray-100 min-h-screen text-gray-800">
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <Header />
+          <main className="container mx-auto px-4 py-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                {activeSection === 0 && <About />}
+                {activeSection === 1 && <WhatWeDo />}
+                {activeSection === 2 && <OurMission />}
+                {activeSection === 3 && <OurTeam />}
+                {activeSection === 4 && <WhyKYNLiV />}
+              </motion.div>
+            </AnimatePresence>
+            <button
+              onClick={nextSection}
+              className="mt-8 bg-blue-500 text-white px-6 py-2 rounded-full flex items-center"
             >
-              Innovating <span className="text-[#b19cd9]">Immunotherapeutic</span><br />
-              <span className="text-[#b19cd9]">Drug Discovery</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl mb-8"
-            >
-              For a healthier future
-            </motion.p>
-          </div>
-        </section>
-
-        {['about-us', 'what-we-do', 'our-mission', 'team', 'why-kynliv'].map((section, index) => (
-          <Section key={section} id={section} index={index} />
-        ))}
-      </main>
+              Next Section <FaArrowRight className="ml-2" />
+            </button>
+          </main>
+        </>
+      )}
     </div>
   );
 };
 
-const Section = ({ id, index }) => {
-  const content = {
-    'about-us': {
-      title: 'Welcome to KYNLiV INC',
-      content: 'At KYNLiV, we are transforming immunotherapy with advanced treatments targeting autoimmune diseases and cancer. Our therapies selectively reprogram immune responses, protecting overall immune function while delivering precise, organ-specific solutions.'
-    },
-    'what-we-do': {
-      title: 'What We Do',
-      content: 'KYNLiV is pioneering targeted therapies that focus on autoimmune diseases and cancers caused by immune dysfunction, preserve the body\'s natural defenses, and offer organ-specific treatments that enhance patient outcomes and quality of life.'
-    },
-    'our-mission': {
-      title: 'Our Mission',
-      content: 'Our mission is to develop innovative, life-changing therapies that address immune dysfunction at its core. By advancing our proprietary drug candidates through clinical trials, we aim to provide more effective treatments with fewer side effects, ensuring a better future for patients worldwide.'
-    },
-    'team': {
-      title: 'Our Team',
-      content: 'At the core of KYNLiV is a dedicated team of scientific innovators, committed to turning groundbreaking scientific research into tangible medical solutions.'
-    },
-    'why-kynliv': {
-      title: 'Why Choose KYNLiV?',
-      content: 'KYNLiV\'s therapies offer a breakthrough—targeting these diseases precisely without compromising the immune system\'s natural defenses. Our treatments are designed to tackle the root causes of immune dysfunction, offering safer, more effective solutions with fewer side effects.'
-    }
-  };
+const LoadingScreen = () => (
+  <div className="fixed inset-0 bg-blue-500 flex items-center justify-center">
+    <motion.div
+      animate={{ rotate: 360 }}
+      transition={{ duration: 2, loop: Infinity, ease: "linear" }}
+    >
+      <FaDna className="text-white text-6xl" />
+    </motion.div>
+  </div>
+);
 
-  return (
-    <section id={id} className="py-20 md:py-32">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl font-bold mb-8 text-[#b19cd9]"
-        >
-          {content[id].title}
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl max-w-3xl"
-        >
-          {content[id].content}
-        </motion.p>
-      </div>
-    </section>
-  );
-};
+const Header = () => (
+  <header className="bg-white shadow-md">
+    <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 className="text-2xl font-bold text-blue-600">KYNLiV</h1>
+      <ul className="flex space-x-4">
+        {sections.map((section) => (
+          <li key={section}>
+            <a href={`#${section.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-blue-500 transition-colors">
+              {section}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </header>
+);
 
-export default KYNLiVWebsite;
+const About = () => (
+  <section>
+    <h2 className="text-3xl font-bold mb-4">Welcome to KYNLiV INC</h2>
+    <p className="mb-4">
+      At <strong>KYNLiV</strong>, we are transforming immunotherapy with advanced treatments targeting <strong>autoimmune diseases</strong> and <strong>cancer</strong>. Our therapies selectively reprogram immune responses, protecting overall immune function while delivering <strong>precise, organ-specific solutions</strong>.
+    </p>
+    <p>We are driven by the mission to offer new hope to millions, shaping the future of medicine.</p>
+  </section>
+);
+
+const WhatWeDo = () => (
+  <section>
+    <h2 className="text-3xl font-bold mb-4">What We Do</h2>
+    <p className="mb-4">KYNLiV is pioneering <strong>targeted therapies</strong> that:</p>
+    <ul className="list-disc pl-6 mb-4">
+      <li>Focus on autoimmune diseases and cancers caused by immune dysfunction.</li>
+      <li>Preserve the body's natural defenses, avoiding common risks of broad immunosuppression.</li>
+      <li>Offer <strong>organ-specific treatments</strong> that enhance patient outcomes and quality of life.</li>
+    </ul>
+  </section>
+);
+
+const OurMission = () => (
+  <section>
+    <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
+    <p className="mb-4">
+      Our mission is to develop <strong>innovative, life-changing therapies</strong> that address immune dysfunction at its core. By advancing our proprietary drug candidates through clinical trials, we aim to provide more effective treatments with <strong>fewer side effects</strong>, ensuring a better future for patients worldwide.
+    </p>
+  </section>
+);
+
+const OurTeam = () => (
+  <section>
+    <h2 className="text-3xl font-bold mb-4">Our Team</h2>
+    <p className="mb-4">At the core of KYNLiV is a dedicated team of <strong>scientific innovators</strong>, including:</p>
+    <ul className="space-y-2">
+      <li><strong>Cini Mathew John, PhD, RPh</strong> – Director of Management and Research</li>
+      <li><strong>Chinna Keshavsa Umeshappa, PhD</strong> – Director of Scientific Discoveries</li>
+      <li><strong>Fazlin Fauzi, MPharm, PhD</strong> – Chief Scientist, Data and Informatics</li>
+      <li><strong>Alice Joshua</strong> – Strategic Partnership Advisor</li>
+      <li><strong>Hanna Mathew</strong> – Technology Officer</li>
+      <li><strong>Annette John, MSc</strong> – Intern Student</li>
+    </ul>
+    <p className="mt-4">Together, we are committed to turning groundbreaking scientific research into tangible medical solutions.</p>
+  </section>
+);
+
+const WhyKYNLiV = () => (
+  <section>
+    <h2 className="text-3xl font-bold mb-4">Why Choose KYNLiV?</h2>
+    <p className="mb-4">
+      Autoimmune diseases and cancers represent some of the greatest challenges in medicine today. <strong>KYNLiV's therapies</strong> offer a breakthrough—targeting these diseases precisely without compromising the immune system's natural defenses.
+    </p>
+    <p>
+      Our treatments are designed to tackle the <strong>root causes of immune dysfunction</strong>, offering <strong>safer, more effective solutions</strong> with fewer side effects.
+    </p>
+  </section>
+);
+
+export default App;
