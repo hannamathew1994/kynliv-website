@@ -1,142 +1,347 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowRight, FaDna, FaMicroscope, FaUsers, FaChartLine } from 'react-icons/fa';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYNLiV Inc. - Immunotherapeutic Drug Discovery</title>
+    <style>
+        :root {
+            --primary-color: #006699;
+            --secondary-color: #00a86b;
+            --accent-color: #ff6b6b;
+            --text-color: #333333;
+            --background-color: #f5f5f5;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-const sections = ['About', 'What We Do', 'Our Mission', 'Our Team', 'Why KYNLiV'];
+        html {
+            scroll-behavior: smooth;
+        }
 
-const App = () => {
-  const [activeSection, setActiveSection] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
 
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000);
-  }, []);
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-  const nextSection = () => {
-    setActiveSection((prev) => (prev + 1) % sections.length);
-  };
+        header {
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
 
-  return (
-    <div className="bg-gray-100 min-h-screen text-gray-800">
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Header />
-          <main className="container mx-auto px-4 py-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSection}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                {activeSection === 0 && <About />}
-                {activeSection === 1 && <WhatWeDo />}
-                {activeSection === 2 && <OurMission />}
-                {activeSection === 3 && <OurTeam />}
-                {activeSection === 4 && <WhyKYNLiV />}
-              </motion.div>
-            </AnimatePresence>
-            <button
-              onClick={nextSection}
-              className="mt-8 bg-blue-500 text-white px-6 py-2 rounded-full flex items-center"
-            >
-              Next Section <FaArrowRight className="ml-2" />
-            </button>
-          </main>
-        </>
-      )}
-    </div>
-  );
-};
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(0, 102, 153, 0.9);
+        }
 
-const LoadingScreen = () => (
-  <div className="fixed inset-0 bg-blue-500 flex items-center justify-center">
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 2, loop: Infinity, ease: "linear" }}
-    >
-      <FaDna className="text-white text-6xl" />
-    </motion.div>
-  </div>
-);
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
 
-const Header = () => (
-  <header className="bg-white shadow-md">
-    <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold text-blue-600">KYNLiV</h1>
-      <ul className="flex space-x-4">
-        {sections.map((section) => (
-          <li key={section}>
-            <a href={`#${section.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-blue-500 transition-colors">
-              {section}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </header>
-);
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
 
-const About = () => (
-  <section>
-    <h2 className="text-3xl font-bold mb-4">Welcome to KYNLiV INC</h2>
-    <p className="mb-4">
-      At <strong>KYNLiV</strong>, we are transforming immunotherapy with advanced treatments targeting <strong>autoimmune diseases</strong> and <strong>cancer</strong>. Our therapies selectively reprogram immune responses, protecting overall immune function while delivering <strong>precise, organ-specific solutions</strong>.
-    </p>
-    <p>We are driven by the mission to offer new hope to millions, shaping the future of medicine.</p>
-  </section>
-);
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
 
-const WhatWeDo = () => (
-  <section>
-    <h2 className="text-3xl font-bold mb-4">What We Do</h2>
-    <p className="mb-4">KYNLiV is pioneering <strong>targeted therapies</strong> that:</p>
-    <ul className="list-disc pl-6 mb-4">
-      <li>Focus on autoimmune diseases and cancers caused by immune dysfunction.</li>
-      <li>Preserve the body's natural defenses, avoiding common risks of broad immunosuppression.</li>
-      <li>Offer <strong>organ-specific treatments</strong> that enhance patient outcomes and quality of life.</li>
-    </ul>
-  </section>
-);
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
 
-const OurMission = () => (
-  <section>
-    <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-    <p className="mb-4">
-      Our mission is to develop <strong>innovative, life-changing therapies</strong> that address immune dysfunction at its core. By advancing our proprietary drug candidates through clinical trials, we aim to provide more effective treatments with <strong>fewer side effects</strong>, ensuring a better future for patients worldwide.
-    </p>
-  </section>
-);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') center/50px 50px;
+            animation: rotate 60s linear infinite;
+        }
 
-const OurTeam = () => (
-  <section>
-    <h2 className="text-3xl font-bold mb-4">Our Team</h2>
-    <p className="mb-4">At the core of KYNLiV is a dedicated team of <strong>scientific innovators</strong>, including:</p>
-    <ul className="space-y-2">
-      <li><strong>Cini Mathew John, PhD, RPh</strong> – Director of Management and Research</li>
-      <li><strong>Chinna Keshavsa Umeshappa, PhD</strong> – Director of Scientific Discoveries</li>
-      <li><strong>Fazlin Fauzi, MPharm, PhD</strong> – Chief Scientist, Data and Informatics</li>
-      <li><strong>Alice Joshua</strong> – Strategic Partnership Advisor</li>
-      <li><strong>Hanna Mathew</strong> – Technology Officer</li>
-      <li><strong>Annette John, MSc</strong> – Intern Student</li>
-    </ul>
-    <p className="mt-4">Together, we are committed to turning groundbreaking scientific research into tangible medical solutions.</p>
-  </section>
-);
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-const WhyKYNLiV = () => (
-  <section>
-    <h2 className="text-3xl font-bold mb-4">Why Choose KYNLiV?</h2>
-    <p className="mb-4">
-      Autoimmune diseases and cancers represent some of the greatest challenges in medicine today. <strong>KYNLiV's therapies</strong> offer a breakthrough—targeting these diseases precisely without compromising the immune system's natural defenses.
-    </p>
-    <p>
-      Our treatments are designed to tackle the <strong>root causes of immune dysfunction</strong>, offering <strong>safer, more effective solutions</strong> with fewer side effects.
-    </p>
-  </section>
-);
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
 
-export default App;
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#what-we-do">What We Do</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#why">Why KYNLiV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>KYNLiV Inc.</h1>
+                <p>Immunotherapeutic Drug Discovery</p>
+                <p><em>Kindness for Life</em></p>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>Welcome to KYNLiV</h2>
+                <div class="card">
+                    <p>At <strong>KYNLiV</strong>, we are revolutionizing the field of immunotherapy by developing cutting-edge treatments that target <strong>autoimmunity</strong> and <strong>cancer</strong> without compromising the immune system's natural defense mechanisms. Our therapies reprogram disease-associated immune cells to selectively suppress harmful responses, while <strong>preserving overall immune function</strong>. This innovative approach brings hope to millions suffering from immune-related disorders and cancers, offering a <strong>precise and organ-specific treatment</strong> that transforms the medical landscape.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-do" class="section">
+            <div class="container">
+                <h2>What We Do</h2>
+                <div class="card">
+                    <p>Our focus is to pioneer <strong>immunotherapeutic treatments</strong> that restore balance to the immune system. We are driven by science and innovation, and we strive to develop therapies that:</p>
+                    <ul>
+                        <li><strong>Target specific autoimmune disorders</strong> and cancers linked to immune dysfunction.</li>
+                        <li><strong>Preserve the body's natural defenses</strong>, avoiding the common issues of broad immunosuppression that lead to increased risk of infections or other health complications.</li>
+                        <li><strong>Provide organ-specific immune regulation</strong>, offering patients more effective, targeted treatment options.</li>
+                    </ul>
+                    <p>We are committed to helping people with chronic immune-related diseases live healthier, fuller lives.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="section">
+            <div class="container">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <h3>Cini Mathew John, PhD, RPh</h3>
+                        <p>Director of Management and Research</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Chinna Keshavsa Umeshappa, PhD</h3>
+                        <p>Director of Scientific Discoveries</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Fazlin Fauzi, MPharm, PhD</h3>
+                        <p>Chief Scientist, Data and Informatics</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Alice Joshua</h3>
+                        <p>Strategic Partnership Advisor</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Hanna Mathew</h3>
+                        <p>Technology Officer</p>
+                    </div>
+                    <div class="team-member">
+                        <h3>Annette John, MSc</h3>
+                        <p>Intern Student</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why" class="section">
+            <div class="container">
+                <h2>Why KYNLiV?</h2>
+                <div class="card">
+                    <p>Autoimmune diseases and cancers present some of the most <strong>complex challenges</strong> in modern medicine, where the immune system mistakenly attacks the body or fails to eliminate harmful cells. While medical advances have been made, there is <strong>no cure</strong> for many autoimmune diseases, and current treatments often rely on suppressing the immune system broadly—leading to severe side effects such as heightened risk of infections and even cancer.</p>
+                    <p>At KYNLiV, we recognize the <strong>urgent need for more precise treatments</strong>, and our therapies aim to deliver the precision and effectiveness required to tackle these diseases at their core, <strong>without harmful side effects</strong>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 KYNLiV Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Lazy loading sections
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Animate team members on hover
+        const teamMembers = document.querySelectorAll('.team-member');
+        teamMembers.forEach(member => {
+            member.addEventListener('mouseenter', () => {
+                member.style.transform = 'scale(1.05)';
+                member.style.transition = 'transform 0.3s ease';
+            });
+            member.addEventListener('mouseleave', () => {
+                member.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
